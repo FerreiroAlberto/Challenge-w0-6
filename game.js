@@ -7,13 +7,13 @@ const getRandomSuit = () => {
   let suit;
   let suitNumber = Math.floor(Math.random() * 4);
   if (suitNumber === 0) {
-    suit = 'diamonds';
+    suit = 'diamantes';
   } else if (suitNumber === 1) {
-    suit = 'hearts';
+    suit = 'corazones';
   } else if (suitNumber === 2) {
-    suit = 'clovers';
+    suit = 'tréboles';
   } else {
-    suit = 'spades';
+    suit = 'picas';
   }
   return suit;
 };
@@ -27,72 +27,83 @@ const getRandomCard = () => {
   if (currentCard.value < 11) {
     currentCard.face = currentCard.value;
   } else if (currentCard.value === 11) {
-    currentCard.face = 'Jack';
+    currentCard.face = 'Sota';
   } else if (currentCard.value === 12) {
-    currentCard.face = 'Queen';
+    currentCard.face = 'Reina';
   } else if (currentCard.value === 13) {
-    currentCard.face = 'King';
+    currentCard.face = 'Rey';
   } else if (currentCard.value === 14) {
-    currentCard.face = 'Ace';
+    currentCard.face = 'As';
   }
 
   return currentCard;
 };
 
-const userChoice = () => {
-  let userCard;
-  const userChoiceElementMayor = document.querySelector('.mayor');
-  userChoiceElementMayor.addEventListener('click', (event) => {
-    userCard = event.target.value;
-  });
-  const userChoiceElementMenor = document.querySelector('.menor');
-  userChoiceElementMenor.addEventListener('click', (event) => {
-    userCard = event.target.value;
-  });
-  return userCard;
+const getUserChoice = (callback) => {
+  const mayorElement = document.querySelector('.mayor');
+  const menorElement = document.querySelector('.menor');
+
+  const onClick = (event) => {
+    mayorElement.removeEventListener('click', onClick);
+    menorElement.removeEventListener('click', onClick);
+    callback(event.target.value);
+  };
+
+  mayorElement.addEventListener('click', onClick);
+  menorElement.addEventListener('click', onClick);
 };
-
-
-const showFirstCard = () => {
-const showCard = getRandomCard();
-    return showCard;
-}
 
 export function game() {
   let rounds = 0;
   let score = 0;
-  while (rounds <= 10) {
-    showFirstCard();
+
+  const showFirstCard = () => {
+    const showCard = getRandomCard();
     const cardElement1 = document.querySelector('.carta1');
     cardElement1.innerHTML = `Has robado el ${showCard.face} de ${showCard.suit}`;
-    let userBet = userChoice();
+    return showCard;
+  };
+
+  const playRound = () => {
+    const showCard = showFirstCard();
+    const cardElement2 = document.querySelector('.carta2');
+
+    let userBet = null;
+    const waitMessage = document.querySelector('.waiting');
+
+    getUserChoice((choice) => {
+      userBet = choice;
+
+      if (!userBet) {
+        waitMessage.innerHTML = `Por favor elige mayor o menor`;
+      }
+
       let flipCard = getRandomCard();
       while (flipCard.value === showCard.value) {
         flipCard = getRandomCard();
       }
+
       if (userBet === 'mayor' && flipCard.value > showCard.value) {
-        const cardElement2 = document.querySelector('p.carta2');
-        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}
-      ¡Has ganado!`;
+        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}\n¡Has ganado!`;
         score += 1;
         rounds += 1;
       } else if (userBet === 'menor' && flipCard.value < showCard.value) {
-        const cardElement2 = document.querySelector('p.carta2');
-        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}
-      ¡Has ganado!`;
+        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}\n¡Has ganado!`;
         score += 1;
         rounds += 1;
       } else {
-        const cardElement2 = document.querySelector('p.carta2');
-        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}
-      ¡Has ganado!`;
+        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}\n¡Has perdido!`;
         rounds += 1;
       }
-    }
-  }
-  if (rounds >= 10) {
-    const userScore = document.querySelector('.score');
-    userScore.innerHTML = `Has jugado ${rounds} rondas
-Tu puntuación es ${score} aciertos.`;
-  }
 
+      if (rounds <= 10) {
+        playRound();
+      } else {
+        const userScore = document.querySelector('.score');
+        userScore.innerHTML = `Has jugado ${rounds} rondas\nTu puntuación es ${score} aciertos.`;
+      }
+    });
+  };
+
+  playRound();
+}
