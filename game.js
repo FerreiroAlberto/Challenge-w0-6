@@ -50,7 +50,7 @@ export function game() {
   alert(`Bienvenido a ISDI Casino!
   El sistema le mostrará una carta
   usted apostará si es mayor o menor.
-  El juego acaba tras 11 ronas`);
+  El juego acaba tras 11 rondas`);
   let rounds = 0;
   let score = 0;
   let continuePlaying = true;
