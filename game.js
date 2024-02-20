@@ -57,15 +57,10 @@ export function game() {
   let rounds = 0;
   let score = 0;
 
-  const showFirstCard = () => {
+  const playRound = () => {
     const showCard = getRandomCard();
     const cardElement1 = document.querySelector('.carta1');
     cardElement1.innerHTML = `Has robado el ${showCard.face} de ${showCard.suit}`;
-    return showCard;
-  };
-
-  const playRound = () => {
-    const showCard = showFirstCard();
     const cardElement2 = document.querySelector('.carta2');
 
     let userBet = null;
@@ -104,6 +99,5 @@ export function game() {
       }
     });
   };
-
   playRound();
 }
