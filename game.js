@@ -40,49 +40,59 @@ const getRandomCard = () => {
 };
 
 const userChoice = () => {
-  let userCard = prompt('Elija mayor o menor.').toLowerCase();
-  while (userCard !== 'mayor' && userCard !== 'menor') {
-    userCard = prompt('Debe elegir mayor o menor.').toLowerCase();
-  }
+  let userCard;
+  const userChoiceElementMayor = document.querySelector('.mayor');
+  userChoiceElementMayor.addEventListener('click', (event) => {
+    userCard = event.target.value;
+  });
+  const userChoiceElementMenor = document.querySelector('.menor');
+  userChoiceElementMenor.addEventListener('click', (event) => {
+    userCard = event.target.value;
+  });
   return userCard;
 };
 
+
+const showFirstCard = () => {
+const showCard = getRandomCard();
+    return showCard;
+}
+
 export function game() {
-  alert(`Bienvenido a ISDI Casino!
-  El sistema le mostrará una carta
-  apueste si la próxima carta será mayor o menor.
-  El juego acaba tras 11 rondas`);
   let rounds = 0;
   let score = 0;
-  let continuePlaying = true;
-  while (rounds <= 10 && continuePlaying === true) {
-    const showCard = getRandomCard();
-    alert(`Su carta es ${showCard.face} of ${showCard.suit}`);
+  while (rounds <= 10) {
+    showFirstCard();
+    const cardElement1 = document.querySelector('.carta1');
+    cardElement1.innerHTML = `Has robado el ${showCard.face} de ${showCard.suit}`;
     let userBet = userChoice();
-    let flipCard = getRandomCard();
-    while (flipCard.value === showCard.value) {
-      flipCard = getRandomCard();
+      let flipCard = getRandomCard();
+      while (flipCard.value === showCard.value) {
+        flipCard = getRandomCard();
+      }
+      if (userBet === 'mayor' && flipCard.value > showCard.value) {
+        const cardElement2 = document.querySelector('p.carta2');
+        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}
+      ¡Has ganado!`;
+        score += 1;
+        rounds += 1;
+      } else if (userBet === 'menor' && flipCard.value < showCard.value) {
+        const cardElement2 = document.querySelector('p.carta2');
+        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}
+      ¡Has ganado!`;
+        score += 1;
+        rounds += 1;
+      } else {
+        const cardElement2 = document.querySelector('p.carta2');
+        cardElement2.innerHTML = `Has robado el ${flipCard.face} de ${flipCard.suit}
+      ¡Has ganado!`;
+        rounds += 1;
+      }
     }
-    if (userBet === 'mayor' && flipCard.value > showCard.value) {
-      alert(`La nueva carta es ${flipCard.face} of ${flipCard.suit}`);
-      alert('Has ganado!');
-      score += 1;
-      rounds += 1;
-    } else if (userBet === 'menor' && flipCard.value < showCard.value) {
-      alert(`La nueva carta es ${flipCard.face} of ${flipCard.suit}`);
-      alert('Has ganado!');
-      score += 1;
-      rounds += 1;
-    } else {
-      alert(`La nueva carta es ${flipCard.face} of ${flipCard.suit}`);
-      alert('Has perdido!');
-      rounds += 1;
-    }
-    continuePlaying = confirm('¿Quieres continuar jugando?');
   }
   if (rounds >= 10) {
-    alert(`Fin del juego
- rondas: ${rounds}
- puntuación: ${score} `);
+    const userScore = document.querySelector('.score');
+    userScore.innerHTML = `Has jugado ${rounds} rondas
+Tu puntuación es ${score} aciertos.`;
   }
-}
+

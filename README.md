@@ -1,4 +1,4 @@
-# SEMANA 0 DÍA 6
+# SEMANA 0 DÍA 7
 
 Para [ISDI CODERS](https://isdicoders.com/)
 

@@ -4,7 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="index.js"></script>
-    <title>Document</title>
+    <link rel="shortcut icon" href="861500-200.png" type="image/x-icon" />
+    <title>Challenge W0C7</title>
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
-  <body></body>
+  <body>
+    <h2>Instrucciones</h2>
+    <section>
+      <ul>
+        <li>El sistema mostrará una carta</li>
+        <li>Apueste si la carta es menor o mayor</li>
+        <li>El juego acaba tras 11 rondas.</li>
+      </ul>
+    </section>
+    <div>
+      <h3>Carta en mesa</h3>
+      <p class="carta1">Esperando carta</p>
+    </div>
+    <div>
+      <h3>Siguiente carta</h3>
+      <p class="carta2">???</p>
+    </div>
+    <section>
+      <form>
+        <p>Apueste mayor o menor</p>
+        <input type="radio" class="mayor" name="answer" value="mayor" />
+        <label for="mayor"><strong>mayor</strong></label>
+        <br />
+        <input type="radio" class="menor" name="answer" value="menor" />
+        <label for="menor"><strong>menor</strong></label>
+        <p class="waiting"></p>
+      </form>
+    </section>
+    <section>
+      <h3>Resultado</h3>
+      <p class="score"></p>
+    </section>
+  </body>
 </html>

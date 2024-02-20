@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans serif;
+  margin: 1rem;
+}
+
+div {
+  display: inline-block;
+  margin: 2rem;
+  border-width: thin;
+  border-style: dotted;
+  border-color: blueviolet;
+  width: auto;
+  height: auto;
+}
