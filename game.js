@@ -44,7 +44,7 @@ const userChoice = () => {
   }
   return userCard;
 };
-const game = () => {
+export function game() {
   let rounds = 0;
   let score = 0;
   let continuePlaying = true;
@@ -78,4 +78,4 @@ const game = () => {
  rondas:${rounds}
  puntuación:${score} `);
   }
-};
+}
