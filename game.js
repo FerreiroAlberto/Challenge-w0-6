@@ -46,10 +46,11 @@ const userChoice = () => {
   }
   return userCard;
 };
+
 export function game() {
   alert(`Bienvenido a ISDI Casino!
   El sistema le mostrará una carta
-  usted apostará si es mayor o menor.
+  apueste si la próxima carta será mayor o menor.
   El juego acaba tras 11 rondas`);
   let rounds = 0;
   let score = 0;
@@ -81,7 +82,7 @@ export function game() {
   }
   if (rounds >= 10) {
     alert(`Fin del juego
- rondas:${rounds}
- puntuación:${score} `);
+ rondas: ${rounds}
+ puntuación: ${score} `);
   }
 }
