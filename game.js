@@ -1,19 +1,21 @@
-const numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-const suits = ['diamonds', 'hearts', 'clovers', 'spades'];
-const cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace'];
-
 const getRandomValue = () => {
-  for (let i = 0; i < numbers.length; i++) {
-    let cardValue = Math.ceil(Math.random() * 13 + 1);
-    return cardValue;
-  }
+  let cardValue = Math.ceil(Math.random() * 13 + 1);
+  return cardValue;
 };
 
 const getRandomSuit = () => {
-  for (let i = 0; i < suits.length; i++) {
-    let suit = Math.floor(Math.random() * 4);
-    return suits[suit];
+  let suit;
+  let suitNumber = Math.floor(Math.random() * 4);
+  if (suitNumber === 0) {
+    suit = 'diamonds';
+  } else if (suitNumber === 1) {
+    suit = 'hearts';
+  } else if (suitNumber === 2) {
+    suit = 'clovers';
+  } else {
+    suit = 'spades';
   }
+  return suit;
 };
 
 const getRandomCard = () => {
@@ -45,6 +47,10 @@ const userChoice = () => {
   return userCard;
 };
 export function game() {
+  alert(`Bienvenido a ISDI Casino!
+  El sistema le mostrará una carta
+  usted apostará si es mayor o menor.
+  El juego acaba tras 11 ronas`);
   let rounds = 0;
   let score = 0;
   let continuePlaying = true;
